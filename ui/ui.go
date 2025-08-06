@@ -12,7 +12,7 @@ const (
 	welcomeMessage               = "Welcome to the Number Guessing Game!\nI'm thinking of a number between 1 and 100.\nYou have 5 chances to guess the correct number.\n\nPlease select the difficulty level:\n1. Easy (10 chances)\n2. Medium (5 chances)\n3. Hard (3 chances)\n\nEnter your choice:"
 	selectedDifficultyMessage    = "\nGreat! You have selected the %s difficulty level.\nLet's start the game!\n\n"
 	enterGuessMessage            = "Enter your guess:"
-	correctGuessMessage          = "Congratulations! You guessed the correct number in %d attempts."
+	correctGuessMessage          = "Congratulations! You guessed the correct number in %d attempts.\n"
 	incorrectGuessGreaterMessage = "Incorrect! The number is greater than %d.\n\n"
 	incorrectGuessLesserMessage  = "Incorrect! The number is less than %d.\n\n"
 	ranOutOfChancesMessage       = "Game Over: You ran out of chances, The random number was %d!\n"
