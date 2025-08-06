@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/amiralitaherkhany/number-guessing-game/difficulty"
-	"github.com/amiralitaherkhany/number-guessing-game/ngg"
+	"github.com/amiralitaherkhany/number-guessing-game/game"
 	"github.com/amiralitaherkhany/number-guessing-game/ui"
 	"log"
 )
@@ -20,11 +20,11 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	game := ngg.New(chances)
+	myGame := game.New(chances)
 
 	for {
-		if isRanOutOfChances := game.NewAttempt(); isRanOutOfChances {
-			ui.ShowGameOver(game.RandomNumber)
+		if isRanOutOfChances := myGame.NewAttempt(); isRanOutOfChances {
+			ui.ShowGameOver(myGame.RandomNumber)
 			break
 		}
 		//
@@ -33,9 +33,9 @@ func main() {
 			log.Fatalln(err)
 		}
 		//
-		guessResult := game.Guess(guess)
-		if guessResult == ngg.Correct {
-			ui.ShowWin(game.Attempts)
+		guessResult := myGame.Guess(guess)
+		if guessResult == game.Correct {
+			ui.ShowWin(myGame.Attempts)
 			break
 		}
 		//

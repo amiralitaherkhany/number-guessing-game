@@ -3,7 +3,7 @@ package ui
 import (
 	"errors"
 	"fmt"
-	"github.com/amiralitaherkhany/number-guessing-game/ngg"
+	"github.com/amiralitaherkhany/number-guessing-game/game"
 	"strconv"
 	"strings"
 )
@@ -25,6 +25,7 @@ func SelectedDifficultyAndStartGame(level string) {
 func ShowWelcome() {
 	fmt.Print(welcomeMessage)
 }
+
 func PromptDifficulty() (int, error) {
 	var difficultyLevel string
 	_, err := fmt.Scan(&difficultyLevel)
@@ -52,11 +53,11 @@ func PromptGuess() (int, error) {
 	return guess, nil
 }
 
-func ShowResult(result ngg.GuessResult, guess int) {
+func ShowResult(result game.GuessResult, guess int) {
 	switch result {
-	case ngg.Lesser:
+	case game.Lesser:
 		fmt.Printf(incorrectGuessLesserMessage, guess)
-	case ngg.Greater:
+	case game.Greater:
 		fmt.Printf(incorrectGuessGreaterMessage, guess)
 	default:
 		panic("unhandled result case")

@@ -1,4 +1,4 @@
-package ngg
+package game
 
 import (
 	"github.com/amiralitaherkhany/number-guessing-game/random"
