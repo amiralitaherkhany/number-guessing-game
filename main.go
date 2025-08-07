@@ -20,6 +20,8 @@ func main() {
 		log.Fatalln(err)
 	}
 
+	ui.SelectedDifficultyAndStartGame(chances)
+
 	myGame := game.New(chances)
 
 	for {

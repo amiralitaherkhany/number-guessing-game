@@ -18,8 +18,15 @@ const (
 	ranOutOfChancesMessage       = "Game Over: You ran out of chances, The random number was %d!\n"
 )
 
-func SelectedDifficultyAndStartGame(level string) {
-	fmt.Printf(selectedDifficultyMessage, level)
+func SelectedDifficultyAndStartGame(chances uint8) {
+	switch chances {
+	case 10:
+		fmt.Printf(selectedDifficultyMessage, "Easy")
+	case 5:
+		fmt.Printf(selectedDifficultyMessage, "Medium")
+	case 3:
+		fmt.Printf(selectedDifficultyMessage, "Hard")
+	}
 }
 
 func ShowWelcome() {
