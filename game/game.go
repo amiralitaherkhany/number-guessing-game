@@ -16,14 +16,7 @@ type Game struct {
 	RandomNumber int
 	Chances      uint8
 	Attempts     uint8
-}
-
-func (g *Game) NewAttempt() (isGameOver bool) {
-	g.Attempts++
-	if g.Attempts > g.Chances {
-		isGameOver = true
-	}
-	return
+	IsGameOver   bool
 }
 
 func New(chances uint8) *Game {
@@ -31,10 +24,16 @@ func New(chances uint8) *Game {
 		Chances:      chances,
 		RandomNumber: random.GenerateNumber(1, 100),
 		Attempts:     0,
+		IsGameOver:   false,
 	}
 }
 
 func (g *Game) Guess(guess int) (result GuessResult) {
+	g.Attempts++
+	if g.Attempts >= g.Chances {
+		g.IsGameOver = true
+	}
+
 	switch {
 	case guess == g.RandomNumber:
 		result = Correct
@@ -43,5 +42,6 @@ func (g *Game) Guess(guess int) (result GuessResult) {
 	case guess > g.RandomNumber:
 		result = Lesser
 	}
+
 	return
 }

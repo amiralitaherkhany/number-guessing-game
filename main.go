@@ -25,7 +25,7 @@ func main() {
 	myGame := game.New(chances)
 
 	for {
-		if isRanOutOfChances := myGame.NewAttempt(); isRanOutOfChances {
+		if myGame.IsGameOver {
 			ui.ShowGameOver(myGame.RandomNumber)
 			break
 		}
