@@ -1,6 +1,7 @@
 package difficulty
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -15,13 +16,15 @@ func TestGetChances_Success(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		result, err := GetChances(test.input)
-		if err != nil {
-			t.Errorf("GetChances returned unexpected error: %v", err)
-		}
-		if result != test.expected {
-			t.Errorf("test failed,input: %v, expected: %v, result: %v", test.input, test.expected, result)
-		}
+		t.Run(fmt.Sprintf("input:%d", test.input), func(t *testing.T) {
+			result, err := GetChances(test.input)
+			if err != nil {
+				t.Errorf("GetChances returned unexpected error: %v", err)
+			}
+			if result != test.expected {
+				t.Errorf("test failed,input: %v, expected: %v, result: %v", test.input, test.expected, result)
+			}
+		})
 	}
 }
 
@@ -41,12 +44,14 @@ func TestGetChances_Error(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		result, err := GetChances(test.input)
-		if err == nil {
-			t.Error("GetChances did not return an error when expected")
-		}
-		if result != test.expected {
-			t.Errorf("test failed,input: %v, expected: %v, result: %v", test.input, test.expected, result)
-		}
+		t.Run(fmt.Sprintf("input:%d", test.input), func(t *testing.T) {
+			result, err := GetChances(test.input)
+			if err == nil {
+				t.Error("GetChances did not return an error when expected")
+			}
+			if result != test.expected {
+				t.Errorf("test failed,input: %v, expected: %v, result: %v", test.input, test.expected, result)
+			}
+		})
 	}
 }

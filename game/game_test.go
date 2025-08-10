@@ -1,6 +1,9 @@
 package game
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 type mockGame struct {
 	*Game
@@ -56,19 +59,21 @@ func TestGuess(t *testing.T) {
 	}
 
 	for i, test := range tests {
-		result := g.Guess(test.input)
+		t.Run(fmt.Sprintf("input:%d", test.input), func(t *testing.T) {
+			result := g.Guess(test.input)
 
-		if uint8(i+1) >= chances {
-			if !g.IsGameOver {
-				t.Errorf("expexted IsGameOver to be true")
+			if uint8(i+1) >= chances {
+				if !g.IsGameOver {
+					t.Errorf("expexted IsGameOver to be true")
+				}
+			} else if g.IsGameOver {
+				t.Errorf("expexted IsGameOver to be false")
 			}
-		} else if g.IsGameOver {
-			t.Errorf("expexted IsGameOver to be false")
-		}
 
-		if result != test.expected {
-			t.Errorf("test failed,input: %v, expected: %v, result: %v", test.input, test.expected, result)
-		}
+			if result != test.expected {
+				t.Errorf("test failed,input: %v, expected: %v, result: %v", test.input, test.expected, result)
+			}
+		})
 	}
 
 }
