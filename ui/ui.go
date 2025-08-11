@@ -16,6 +16,7 @@ const (
 	incorrectGuessGreaterMessage = "Incorrect! The number is greater than %d.\n\n"
 	incorrectGuessLesserMessage  = "Incorrect! The number is less than %d.\n\n"
 	ranOutOfChancesMessage       = "Game Over: You ran out of chances, The random number was %d!\n"
+	askForNewGameMessage         = "\nDo you want to play again?[y/n]"
 )
 
 func SelectedDifficultyAndStartGame(chances uint8) {
@@ -77,4 +78,23 @@ func ShowWin(attempts uint8) {
 
 func ShowGameOver(correct int) {
 	fmt.Printf(ranOutOfChancesMessage, correct)
+}
+
+func AskForNewGame() (bool, error) {
+	var input string
+	var isWant bool
+	fmt.Print(askForNewGameMessage)
+	_, err := fmt.Scan(&input)
+	if err != nil {
+		return false, fmt.Errorf("input scanning error: %v", err)
+	}
+	switch input {
+	case "y", "Yes", "yes":
+		isWant = true
+	case "n", "no", "No":
+		isWant = false
+	default:
+		return false, errors.New("Invalid choice! please enter y or n")
+	}
+	return isWant, nil
 }

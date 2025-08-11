@@ -1,10 +1,12 @@
 package main
 
 import (
+	"fmt"
 	"github.com/amiralitaherkhany/number-guessing-game/difficulty"
 	"github.com/amiralitaherkhany/number-guessing-game/game"
 	"github.com/amiralitaherkhany/number-guessing-game/ui"
 	"log"
+	"os"
 )
 
 func main() {
@@ -21,6 +23,8 @@ func main() {
 	}
 
 	ui.SelectedDifficultyAndStartGame(chances)
+
+StartOfGame:
 
 	myGame := game.New(chances)
 
@@ -42,5 +46,16 @@ func main() {
 		}
 		//
 		ui.ShowResult(guessResult, guess)
+	}
+	isWant, err := ui.AskForNewGame()
+	if err != nil {
+		log.Fatalln(err)
+	}
+	if isWant {
+		fmt.Println()
+		goto StartOfGame
+	} else {
+		fmt.Println()
+		os.Exit(0)
 	}
 }
