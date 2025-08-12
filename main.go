@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"github.com/amiralitaherkhany/number-guessing-game/difficulty"
 	"github.com/amiralitaherkhany/number-guessing-game/game"
+	"github.com/amiralitaherkhany/number-guessing-game/timer"
 	"github.com/amiralitaherkhany/number-guessing-game/ui"
 	"log"
 	"os"
-	"time"
 )
 
 func main() {
@@ -25,10 +25,14 @@ func main() {
 
 	ui.SelectedDifficultyAndStartGame(chances)
 
+	gameTimer := timer.New()
+
 StartOfGame:
 
 	myGame := game.New(chances)
-	startTime := time.Now()
+
+	gameTimer.StartTimer()
+
 	for {
 		if myGame.IsGameOver {
 			ui.ShowGameOver(myGame.RandomNumber)
@@ -42,7 +46,8 @@ StartOfGame:
 		//
 		guessResult := myGame.Guess(guess)
 		if guessResult == game.Correct {
-			ui.ShowWin(myGame.Attempts, time.Since(startTime))
+			gameTimer.StopTimer()
+			ui.ShowWin(myGame.Attempts, gameTimer.GetTime())
 			break
 		}
 		//
