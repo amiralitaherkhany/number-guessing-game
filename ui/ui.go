@@ -6,13 +6,14 @@ import (
 	"github.com/amiralitaherkhany/number-guessing-game/game"
 	"strconv"
 	"strings"
+	"time"
 )
 
 const (
 	welcomeMessage               = "Welcome to the Number Guessing Game!\nI'm thinking of a number between 1 and 100.\nYou have 5 chances to guess the correct number.\n\nPlease select the difficulty level:\n1. Easy (10 chances)\n2. Medium (5 chances)\n3. Hard (3 chances)\n\nEnter your choice:"
 	selectedDifficultyMessage    = "\nGreat! You have selected the %s difficulty level.\nLet's start the game!\n\n"
 	enterGuessMessage            = "Enter your guess:"
-	correctGuessMessage          = "Congratulations! You guessed the correct number in %d attempts.\n"
+	correctGuessMessage          = "Congratulations! You guessed the correct number in %d attempts in %02d:%02d:%02d.\n"
 	incorrectGuessGreaterMessage = "Incorrect! The number is greater than %d.\n\n"
 	incorrectGuessLesserMessage  = "Incorrect! The number is less than %d.\n\n"
 	ranOutOfChancesMessage       = "Game Over: You ran out of chances, The random number was %d!\n"
@@ -72,8 +73,11 @@ func ShowResult(result game.GuessResult, guess int) {
 	}
 }
 
-func ShowWin(attempts uint8) {
-	fmt.Printf(correctGuessMessage, attempts)
+func ShowWin(attempts uint8, elapsed time.Duration) {
+	hours := int(elapsed.Hours())
+	minutes := int(elapsed.Minutes()) % 60
+	seconds := int(elapsed.Seconds()) % 60
+	fmt.Printf(correctGuessMessage, attempts, hours, minutes, seconds)
 }
 
 func ShowGameOver(correct int) {

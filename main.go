@@ -7,6 +7,7 @@ import (
 	"github.com/amiralitaherkhany/number-guessing-game/ui"
 	"log"
 	"os"
+	"time"
 )
 
 func main() {
@@ -27,7 +28,7 @@ func main() {
 StartOfGame:
 
 	myGame := game.New(chances)
-
+	startTime := time.Now()
 	for {
 		if myGame.IsGameOver {
 			ui.ShowGameOver(myGame.RandomNumber)
@@ -41,7 +42,7 @@ StartOfGame:
 		//
 		guessResult := myGame.Guess(guess)
 		if guessResult == game.Correct {
-			ui.ShowWin(myGame.Attempts)
+			ui.ShowWin(myGame.Attempts, time.Since(startTime))
 			break
 		}
 		//
